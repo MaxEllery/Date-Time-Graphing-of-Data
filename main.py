@@ -16,6 +16,7 @@ pf = df['PF_avg'].to_list()
 f = df['F_avg (Hz)'].to_list()
 s = df['S_tot (kVA)'].to_list()
 q = df['Q_tot (kVAr)'].to_list()
+v = df['V_avg (V)'].to_list()
 
 datetime = df['Date'] + " " + df['Time']
 datetime = datetime.apply(date_function) ## ADDED TO CONVERT TO datetime objects
@@ -43,6 +44,12 @@ datetime = datetime.apply(date_function) ## ADDED TO CONVERT TO datetime objects
 # plt.ylabel('Power Factor')
 # plt.title('Power Factor over Time')
 # matplotlib.pyplot.show() ## ADDED TO SHOW PLOT
+
+matplotlib.pyplot.plot_date(datetime, v, fmt='m.')
+plt.xlabel('Date and Time')
+plt.ylabel('Voltage')
+plt.title('Voltage over Time')
+matplotlib.pyplot.show() ## ADDED TO SHOW PLOT
 
 # colors = (0,0,0)
 # plt.scatter(q,p,c=colors, alpha=0.5)
@@ -72,6 +79,10 @@ q_max = max(q)
 q_min = min(q)
 q_avg = sum(q) / len(q)
 
+v_max = max(v)
+v_min = min(v)
+v_avg = sum(v) / len(v)
+
 
 
 min_p_position = df.loc[df['P_tot (kW)'] == p_min]
@@ -97,4 +108,8 @@ print()
 print("Average Q = " + str(round(q_avg, 3)) + " kVAr")
 print("Min. Q = " + str(round(q_min, 3)) + " kVAr")
 print("Max. Q = " + str(round(q_max, 3)) + " kVAr")
+print()
+print("Average V = " + str(round(v_avg, 3)) + " V")
+print("Min. V = " + str(round(v_min, 3)) + " V")
+print("Max. V = " + str(round(v_max, 3)) + " V")
 
